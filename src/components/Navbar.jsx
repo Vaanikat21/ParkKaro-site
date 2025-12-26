@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Menu, X, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,26 +31,26 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
         {/* --- Logo Section --- */}
-        <a href="#home" className="flex-shrink-0 cursor-pointer group">
+        <Link to="/" className="flex-shrink-0 cursor-pointer group">
           <span className="text-2xl font-black tracking-tighter text-gray-900">
             Park<span className="text-orange-500 group-hover:text-purple-600 transition-colors duration-300">Karo</span>
           </span>
-        </a>
+        </Link>
 
         {/* --- Desktop Navigation --- */}
         <div className="hidden md:flex items-center gap-10">
 
           {/* Links with animated underline */}
           <div className="flex items-center gap-8 text-sm font-semibold text-gray-600">
-            {[{ name: 'Home', id: '#home' }, { name: 'Features', id: '#features' }, { name: 'Feedbacks', id: '#reviews' }, { name: 'FAQs', id: '#faqs' }, { name: 'How it works', id: '#how-it-works' }].map((item) => (
-              <a
+            {[{ name: 'Home', path: '/' }, { name: 'How it works', path: '/how-it-works' }].map((item) => (
+              <Link
                 key={item.name}
-                href={item.id}
+                to={item.path}
                 className="relative group py-2 hover:text-gray-900 transition-colors"
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -86,19 +87,22 @@ const Navbar = () => {
             className="md:hidden fixed inset-0 z-40 bg-white top-[70px] overflow-hidden"
           >
             <div className="px-6 py-8 flex flex-col gap-6">
-              {[{ name: 'Home', id: '#home' }, { name: 'Features', id: '#features' }, { name: 'Feedbacks', id: '#reviews' }, { name: 'FAQs', id: '#faqs' }, { name: 'How it works', id: '#how-it-works' }].map((item, i) => (
-                <motion.a
+              {[{ name: 'Home', path: '/' }, { name: 'How it works', path: '/how-it-works' }].map((item, i) => (
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
                   key={item.name}
-                  href={item.id}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between text-xl font-bold text-gray-900 border-b border-gray-100 pb-4"
                 >
-                  {item.name}
-                  <ChevronRight size={20} className="text-gray-300" />
-                </motion.a>
+                  <Link
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-between text-xl font-bold text-gray-900 border-b border-gray-100 pb-4"
+                  >
+                    {item.name}
+                    <ChevronRight size={20} className="text-gray-300" />
+                  </Link>
+                </motion.div>
               ))}
               <motion.button
                 initial={{ opacity: 0, y: 20 }}

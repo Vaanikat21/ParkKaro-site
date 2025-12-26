@@ -1,27 +1,18 @@
-import HeroSection from "./components/HeroSection";
+import { Routes, Route } from 'react-router-dom';
 import NavBar from "./components/Navbar";
-import Features from "./components/Features";
-import Reviews from "./components/Reviews";
-import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
-import HowItWorks from "./components/HowItWorks";
-
+import Home from "./pages/Home";
+import HowItWorksPage from "./pages/HowItWorksPage";
 
 function App() {
 
   return (
     <>
       <NavBar />
-      <div id="home" className="scroll-mt-28"><HeroSection /></div>
-      <div className="w-full h-px bg-gray-200" />
-      <div id="features" className="scroll-mt-28"><Features /></div>
-      <div className="w-full h-px bg-gray-200" />
-      <div id="reviews" className="scroll-mt-28"><Reviews /></div>
-      <div className="w-full h-px bg-gray-200" />
-      <div id="faqs" className="scroll-mt-28"><FAQ /></div>
-      <div className="w-full h-px bg-gray-200" />
-      <div id="how-it-works" className="scroll-mt-28"><HowItWorks /></div>
-      <div className="w-full h-px bg-gray-200" />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
+      </Routes>
       <Footer />
     </>
   )
